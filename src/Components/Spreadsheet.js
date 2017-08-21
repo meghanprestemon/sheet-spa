@@ -1,16 +1,19 @@
 import React, { Component } from 'react';
 import { Menu, Segment } from 'semantic-ui-react'
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { Link } from 'react-router-dom'
-import Home from './Home/Home.js';
-import Login from './Login.js';
-import {  } from '../actions';
 
 const Spreadsheet = () => (
   <div className="spreadsheet">
     <Table celled striped definition>
-      
+      <Table.Header>
+        <Table.Row>
+          <Table.HeaderCell />
+          {/* needs a function for creating alpha header */}
+        </Table.Row>
+      </Table.Header>
+
+      <Table.Body>
+        {/* needs a function for creating numbered rows */}
+      </Table.Body>
     </Table>
   </div>
 );
