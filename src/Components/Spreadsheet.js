@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Menu, Segment } from 'semantic-ui-react'
+import { Table } from 'semantic-ui-react'
 
 const Spreadsheet = () => (
   <div className="spreadsheet">
