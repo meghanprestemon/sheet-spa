@@ -1,19 +1,44 @@
-import data from '../seeds';
+import { RENDER_SHEETS } from './renderActions';
 
 export const SHEET_RETRIEVED = 'SHEET_RETRIEVED';
+export const STORE_SHEET_DATA = 'STORE_SHEET_DATA';
 
-export function fetchSheet() {
-  return async (dispatch) => {
-    const range = data.range;
-    const majorDimension = data.majorDimension;
-    const header = data.values[0];
-    const rows = data.values.slice(1, data.values.length);
-    await dispatch({
-      type: SHEET_RETRIEVED,
-      range,
-      majorDimension,
-      header,
-      rows,
+export function fetchSheet(spreadsheetId, sheetName) {
+  const queryString =
+  `{
+      sheets(spreadsheetId:"${spreadsheetId}", sheetName:"${sheetName}") {
+        spreadsheetId
+        sheets {
+          sheetName
+          majorDimension
+          range
+          values
+        }
+      }
+    }`;
+  const request = { query: queryString };
+  return (dispatch, getState, { SHEETS_API }) => {
+    SHEETS_API.fetchData(request)
+      .then(response => response.data)
+      .then((sheet) => {
+        dispatch({
+          type: SHEET_RETRIEVED,
+          sheetData: sheet,
+        });
+        dispatch({
+          type: RENDER_SHEETS,
+        });
+      });
+  };
+}
+
+export function storeSheetData(spreadsheetId, sheetName) {
+  return (dispatch) => {
+    dispatch({
+      type: STORE_SHEET_DATA,
+      spreadsheetId,
+      sheetName,
     });
+    dispatch(fetchSheet(spreadsheetId, sheetName));
   };
 }

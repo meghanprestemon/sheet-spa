@@ -3,18 +3,25 @@
 # dependencies
 /node_modules
 
+/libs/widget-libs/lib
+/libs/widget-libs/node_modules
+
 # testing
 /coverage
 
 # production
 /build
 
+/libs/widget-libs/lib
+/libs/widget-libs/node_modules
 # misc
 .DS_Store
 .env.local
 .env.development.local
 .env.test.local
 .env.production.local
+
+codeship.aes
 
 npm-debug.log*
 yarn-debug.log*
